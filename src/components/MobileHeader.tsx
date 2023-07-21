@@ -4,9 +4,9 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { useState } from 'react';
 import { callsToAction, classNames, products } from './util';
 
-const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+const MobileHeader = ({ isOpen } : { isOpen:boolean}) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-const DisclosureContent = ({ isOpen } : { isOpen:boolean}) => {
   // open 상태에 따라 보여지는 컴포넌트를 작성합니다.
   if (!isOpen) {
     return null; // open 상태가 아니라면 컴포넌트를 숨깁니다.
@@ -19,10 +19,10 @@ const DisclosureContent = ({ isOpen } : { isOpen:boolean}) => {
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only">Obzen</span>
               <img
                 className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                src="https://obzen.com/img/logo_red.png"
                 alt=""
               />
             </a>
@@ -98,4 +98,4 @@ const DisclosureContent = ({ isOpen } : { isOpen:boolean}) => {
   );
 };
 
-export default DisclosureContent;
+export default MobileHeader;
