@@ -1,5 +1,6 @@
 import MobileHeader from './MobileHeader';
 import DesktopHeader from './DesktopHeader';
+import Body from './Body';
 
 const MainLayout = () => {
     // Define a breakpoint value that determines when the screen is considered mobile
@@ -15,6 +16,12 @@ const MainLayout = () => {
     <>
       {isMobile ? <MobileHeader isOpen={false} /> : <DesktopHeader />}
       {/* Rest of your layout content... */}
+
+      <div className="py-8 text-center">
+        <h1 className="text-4xl font-bold">Main Layout Content</h1>
+        <p className="mt-4 text-lg text-gray-600">This is the content of MainLayout.</p>
+      </div>
+      <Body /> {/* Body 컴포넌트를 렌더링합니다. */}
     </>
   );
 };
