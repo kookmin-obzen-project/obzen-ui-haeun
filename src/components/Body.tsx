@@ -1,4 +1,5 @@
 import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
+import { useState } from 'react';
 
 const features = [
   {
@@ -20,37 +21,78 @@ const features = [
 ]
 
 export default function Body() {
+  const [selectedView, setSelectedView] = useState('view1');
+
   return (
-    <div className="grid grid-cols-2 gap-4 p-8">
-      <div className="col-span-1">
-        <h2 className="text-base font-semibold leading-7 text-indigo-600">Deploy faster</h2>
-        <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">A better workflow</p>
-        <p className="mt-6 text-lg leading-8 text-gray-600">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque,
-          iste dolor cupiditate blanditiis ratione.
-        </p>
-        <dl className="mt-10 space-y-8 text-base leading-7 text-gray-600">
-          {features.map((feature) => (
-            <div key={feature.name} className="flex items-start">
-              <div className="flex-shrink-0">
-                <feature.icon className="h-6 w-6 text-indigo-600" aria-hidden="true" />
-              </div>
-              <div className="ml-3">
-                <dt className="font-semibold text-gray-900">{feature.name}</dt>
-                <dd className="mt-1">{feature.description}</dd>
-              </div>
-            </div>
-          ))}
-        </dl>
+    <div className="flex flex-grow">
+    {/* 왼쪽 영역 */}
+    <div className="w-2/8 bg-indigo-50 p-6">
+      <h2 className="text-base font-semibold leading-7 text-indigo-600">Choose a view</h2>
+      <div className="mt-4">
+          <label className="inline-flex items-center space-x-2 cursor-pointer">
+            <input
+              type="radio"
+              className="form-radio h-4 w-4 text-indigo-600"
+              value="view1"
+              checked={selectedView === 'view1'}
+              onChange={() => setSelectedView('view1')}
+            />
+            <span className="text-gray-900">View 1</span>
+          </label>
+          <label className="inline-flex items-center space-x-2 cursor-pointer">
+            <input
+              type="radio"
+              className="form-radio h-4 w-4 text-indigo-600"
+              value="view2"
+              checked={selectedView === 'view2'}
+              onChange={() => setSelectedView('view2')}
+            />
+            <span className="text-gray-900">View 2</span>
+          </label>
+          <label className="inline-flex items-center space-x-2 cursor-pointer">
+            <input
+              type="radio"
+              className="form-radio h-4 w-4 text-indigo-600"
+              value="view3"
+              checked={selectedView === 'view3'}
+              onChange={() => setSelectedView('view3')}
+            />
+            <span className="text-gray-900">View 3</span>
+          </label>
+        </div>
       </div>
-      <div className="col-span-1 flex flex-col justify-center items-center">
-        <p className="text-lg leading-7 text-gray-600">
-          이 곳에 오른쪽 화면에 대한 간단한 설명이 들어갑니다.
-        </p>
+
+      {/* 오른쪽 영역 */}
+      <div className="w-6/8 flex flex-col justify-center items-center">
+        {selectedView === 'view1' && (
+          
+          <>
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl">View 1</h1>
+            <p className="mt-6 text-lg leading-8 text-gray-600">
+              This is the content of View 1.
+            </p>
+          </>
+        )}
+        {selectedView === 'view2' && (
+          <>
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl">View 2</h1>
+            <p className="mt-6 text-lg leading-8 text-gray-600">
+              This is the content of View 2.
+            </p>
+          </>
+        )}
+        {selectedView === 'view3' && (
+          <>
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl">View 3</h1>
+            <p className="mt-6 text-lg leading-8 text-gray-600">
+              This is the content of View 3.
+            </p>
+          </>
+        )}
         <button className="mt-4 px-6 py-3 rounded-lg bg-indigo-600 text-white text-base font-semibold">
           버튼
         </button>
       </div>
     </div>
-  )
+  );
 }
