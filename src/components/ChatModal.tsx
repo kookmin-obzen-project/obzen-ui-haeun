@@ -8,7 +8,7 @@ const ChatModal: React.FC<ChatModalProps> = ({ onClose }) => {
   const [messages, setMessages] = useState<{ text: string; isMine: boolean }[]>([]);
   const [inputText, setInputText] = useState('');
   const messagesContainerRef = useRef<HTMLDivElement>(null);
-  const [chatRoomWidth, setChatRoomWidth] = useState<number>(400); // Initial width of the chat room
+  const [isExpanded, setIsExpanded] = useState(false); // Track whether the chat room is expanded or not
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(e.target.value);
@@ -23,8 +23,7 @@ const ChatModal: React.FC<ChatModalProps> = ({ onClose }) => {
   };
 
   const handleShowMore = () => {
-    // Double the width of the chat room
-    setChatRoomWidth((prevWidth) => prevWidth * 2);
+    setIsExpanded((prevExpanded) => !prevExpanded); // Toggle the expanded state
   };
 
   // 초기 메시지 로드
@@ -44,13 +43,15 @@ const ChatModal: React.FC<ChatModalProps> = ({ onClose }) => {
     }
   }, [messages]);
 
+  const chatRoomWidth = isExpanded ? 800 : 400; // Set the width based on the expanded state
+
   return (
     <div
       className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
     >
       <div
         className="bg-white p-8"
-        style={{ width: `${chatRoomWidth}px`, maxWidth: '90%' }} // Set the width of the chat room and limit its maximum width to 90% of the screen
+        style={{ width: `${chatRoomWidth}px`, maxWidth: '90%' }}
       >
         <h2 className="text-2xl font-semibold mb-4">Chat Room</h2>
         <div
