@@ -8,6 +8,7 @@ const ChatModal: React.FC<ChatModalProps> = ({ onClose }) => {
   const [messages, setMessages] = useState<{ text: string; isMine: boolean }[]>([]);
   const [inputText, setInputText] = useState('');
   const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const [chatRoomWidth, setChatRoomWidth] = useState<number>(400); // Initial width of the chat room
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(e.target.value);
@@ -22,13 +23,8 @@ const ChatModal: React.FC<ChatModalProps> = ({ onClose }) => {
   };
 
   const handleShowMore = () => {
-    // 이 함수를 원하는 대로 구현하여 추가 메시지를 가져오는 동작을 처리하세요.
-    // 예시에서는 가짜 데이터를 사용하여 간단히 구현하였습니다.
-    const moreFakeMessages = [
-      { text: 'More messages!', isMine: true },
-      { text: 'Even more messages!', isMine: false },
-    ];
-    setMessages((prevMessages) => [...prevMessages, ...moreFakeMessages]);
+    // Double the width of the chat room
+    setChatRoomWidth((prevWidth) => prevWidth * 2);
   };
 
   // 초기 메시지 로드
@@ -48,10 +44,14 @@ const ChatModal: React.FC<ChatModalProps> = ({ onClose }) => {
     }
   }, [messages]);
 
-
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-8">
+    <div
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+    >
+      <div
+        className="bg-white p-8"
+        style={{ width: `${chatRoomWidth}px`, maxWidth: '90%' }} // Set the width of the chat room and limit its maximum width to 90% of the screen
+      >
         <h2 className="text-2xl font-semibold mb-4">Chat Room</h2>
         <div
           ref={messagesContainerRef}
